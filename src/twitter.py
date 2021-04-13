@@ -75,8 +75,6 @@ class Twitter:
         return tweets
 
     def get_text_content(self, article):
-        # css-901oao css-16my406 r-poiln3 r-bcqeeo r-qvutc0
-
         # TO DO:
         # Figure why this doesn't work
         # span = article.find_elements_by_css_selector(".css-901oao .css-16my406 .r-poiln3 .r-bcqeeo .r-qvutc0")
@@ -117,16 +115,7 @@ class Twitter:
             print("No previous tweets. Getting them now!")
             existing_tweets = self._create_tweets( self._get_articles() )
         else:
-            # TO DO:
-            # Check if there are any new tweets before scrolling
-
-            print("We're checking this.. right?")
             t = self._create_tweets( self._get_articles() )
-
-            for t1 in t:
-                if(not t1 in existing_tweets):
-                    print(t1["url"], "was loaded after the last check")
-            pass
 
         driver.execute_script("window.scrollTo(0, document.body.scrollHeight/.6);")
         time.sleep(5)
