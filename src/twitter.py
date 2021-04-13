@@ -130,10 +130,10 @@ class Twitter:
 
         return existing_tweets
 
-    def get_bookmars(self):
+    def get_from(self, url: str):
         driver = self.driver
 
-        driver.get("https://twitter.com/i/bookmarks")
+        driver.get(url)
 
         WebDriverWait(driver, 5).until(
             EC.presence_of_element_located((By.TAG_NAME, "article"))
