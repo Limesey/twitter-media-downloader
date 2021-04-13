@@ -3,6 +3,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 
+import time
+
 class Twitter:
     def __init__(self, headless: bool = None, auth_token: str = None):
         options = webdriver.FirefoxOptions()
@@ -104,6 +106,41 @@ class Twitter:
         if(len(a) > 1 and a[2].get_attribute("href")):
             return a[2].get_attribute("href")
 
+    # TO DO:
+    # Look into missing tweets (seems to be a low number)
+    # Finds 43/51 tweets
+    def _fetch_new_tweets(self, existing_tweets: list = None):
+        driver = self.driver
+        new_tweets_added = False
+
+        if(existing_tweets is None):
+            print("No previous tweets. Getting them now!")
+            existing_tweets = self._create_tweets( self._get_articles() )
+        else:
+            # TO DO:
+            # Check if there are any new tweets before scrolling
+
+            print("We're checking this.. right?")
+            t = self._create_tweets( self._get_articles() )
+
+            for t1 in t:
+                if(not t1 in existing_tweets):
+                    print(t1["url"], "was loaded after the last check")
+            pass
+
+        driver.execute_script("window.scrollTo(0, document.body.scrollHeight/.6);")
+        time.sleep(5)
+
+        for tweet in self._create_tweets( self._get_articles() ):
+            if(not tweet in existing_tweets):
+                new_tweets_added = True
+                existing_tweets.append(tweet)
+
+        if(new_tweets_added):
+            self._fetch_new_tweets(existing_tweets)
+
+        return existing_tweets
+
     def get_bookmars(self):
         driver = self.driver
 
@@ -113,5 +150,4 @@ class Twitter:
             EC.presence_of_element_located((By.TAG_NAME, "article"))
         )
 
-
-        return self._create_tweets( self._get_articles() )
+        return self._fetch_new_tweets()
