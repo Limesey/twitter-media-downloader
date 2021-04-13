@@ -54,8 +54,19 @@ class Twitter:
 
         return self._get_articles()
 
-    def get_video_tweets(self):
-        pass
+    def get_video_tweets(self, tweets: list):
+        """
+        Filters tweets containing video files
+        """
+        video_tweets = []
+        
+        for tweet in tweets:
+            videos = tweet.find_elements_by_tag_name("video")
+
+            if(len(videos) > 0):
+                video_tweets.append(tweet)
+
+        return video_tweets
 
 if(__name__ == "__main__"):
     Twitter().get_bookmarks()
