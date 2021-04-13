@@ -1,4 +1,7 @@
 from selenium import webdriver
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
 
 class Twitter:
     def __init__(self, auth: str = None, headless: bool = None):
@@ -27,10 +30,19 @@ class Twitter:
         """
         Returns an authenticated user's bookmarks
         """
+        driver = self.browser
 
-        browser = self.browser
+        driver.get("https://twitter.com/i/bookmarks")
 
-        browser.get("https://twitter.com/i/bookmarks")
+        WebDriverWait(driver, 5).until(
+            EC.presence_of_element_located((By.TAG_NAME, "article"))
+        )
+
+        # TO DO:
+        # Fetch all bookmarked tweets (scrolling down to load them)
+        # Handle Twitter's random errors
+
+        return self._get_articles()
 
     def get_video_tweets(self):
         pass
