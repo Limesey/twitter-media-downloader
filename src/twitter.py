@@ -1,6 +1,3 @@
-from copy import Error
-import time
-
 from selenium import webdriver
 
 class Twitter:
