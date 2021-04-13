@@ -17,6 +17,16 @@ class Twitter:
         if(self.auth_cookie):
             self.browser.add_cookie({"name": "auth_token", "value": self.auth_cookie})
 
+    def get_author(self, tweet):
+        """
+        Returns the URL to the tweet's author
+        """
+
+        a = tweet.find_elements_by_tag_name("a")
+
+        if(len(a) > 0 and a[1].get_attribute("href")):
+            return a[1].get_attribute("href")
+
     def get_link(self, tweet):
         """
         Get a tweet's link
