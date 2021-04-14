@@ -19,7 +19,7 @@ It then uses youtube-dl to download them.
 Clone this repository using Git:
 
 ```
-$ git clone git@github.com:Limesey/twitter-video-downloader.git
+$ git clone git@github.com:Limesey/twitter-media-downloader.git
 ```
 
 Install the project's dependencies:
@@ -31,7 +31,7 @@ $ pip install -r requirements.txt
 Run:
 
 ```
-$ python src/index.py
+$ python src/cli.py
 ```
 
 ## Features
@@ -42,6 +42,7 @@ $ python src/index.py
 ## Technologies
 
 - [Python 3.8.4](https://www.python.org/)
+- [argparse 1.4.0](https://pypi.org/project/argparse/)
 - [Selenium 3.141.0](https://pythonspot.com/selenium/)
 - [python-dotenv 0.17.0](https://pypi.org/project/python-dotenv/)
 - [youtube_dl 2021.4.7](https://pypi.org/project/youtube_dl/)
