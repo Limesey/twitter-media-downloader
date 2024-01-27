@@ -2,6 +2,8 @@
 
 Twitter Video Downloader allows you to download videos from multiple tweets.
 
+**[Archive note]:** I cannot confirm that this works in current year (2024), and it definitely didn't fully work in the year it was written. Regardless, feel free to read through it and use as you please.
+
 ## Table of Contents
 
 - [Introduction](#introduction)
